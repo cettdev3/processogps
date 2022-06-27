@@ -1,0 +1,960 @@
+<style>
+    .btn-custom {
+        padding: 5px 10px;
+        background-color: lightgray;
+        display: inline-block;
+    }
+
+    .btn-custom:hover {
+        cursor: pointer ;
+        background-color: #ededed;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .mt-3 {
+        margin-top: 12px;
+    }
+
+</style>
+
+<!-- NOMES VARIAVEIS -->
+<!-- 
+    DADOS DO SOLICITANTE:
+    solProtocEmail
+    solProtocNomeCompleto
+    solProtocTelefone
+    solProtocPrioridade
+    solProtocDepartamento
+    solProtocInstRefer
+    solProtocProjeto 
+
+    DADOS SOLICITAÇÃO DE TRANSPORTE:
+    tipoSolTransporte
+    aluguelTranspJustificativa
+    contratarMotoristaAdicional
+
+    ALUGUEL DE VEÍCULO:
+    MotoristaHabilitadoNomeCompleto
+    MotoristaHabilitadoCpf
+    MotoristaHabilitadoCargo
+    MotoristaHabilitadoNascimento
+    MotoristaHabilitadoRg
+    MotoristaHabilitadoOrgaoEm
+    MotoristaHabilitadoEndereco
+    MotoristaHabilitadoCep
+    MotoristaHabilitadoEmail
+    MotoristaHabilitadoTelefone
+    MotoristaHabilitadoCronogViagem
+    MotoristaHabilitadoInstRef
+    MotoristaHabilitadoLinkCnh
+    MotoristaHabilitadolocalHorVeiculo
+    MotoristaHabilitadoDescVeiculo
+
+    CONTRATAÇÃO DE SERVIÇO:
+    contratServInstituicaoRef
+    contratServJustNecesside
+    contratServLocalExecucao
+
+    COMPRA DE PASSAGEM:
+    compraPassNomeCompleto
+    compraPassCpf
+    compraPassCargo
+    compraPassNascimento
+    compraPassRg
+    compraPassOrgaoEmissor
+    compraPassEndereco
+    compraPassCep
+    compraPassEmail
+    compraPassTelefone
+    compraPassBanco
+    compraPassAgencia
+    compraPassConta
+    compraPassPix
+    compraPassCronogSaidaData
+    compraPassCronogSaidaHora
+    compraPassCronogRetornoData
+    compraPassCronogRetornoHora
+    compraPassLinkRgCnh
+
+    SOLICITAÇÃO DE DIARIAS: PROFESSOR
+    SolDiariasProfessorSelect
+    solDiariasProfJustificativa
+    solDiariasProfNomeCompleto
+    solDiariasProfCpf
+    solDiariasProfCpf
+    solDiariasProfCargo
+    solDiariasProfNascimento
+    solDiariasProfRg
+    solDiariasProfOrgaoEmissor
+    solDiariasProfEndereco
+    solDiariasProfCep
+    solDiariasProfEmail
+    solDiariasProfTelefone
+    solDiariasProfBanco
+    solDiariasProfAgencia
+    solDiariasProfConta
+    solDiariasProfPix
+    solDiariasProfCronogramaViagem
+    solDiariasProfInstReferencia
+-->
+<!-- / NOMES VARIAVEIS -->
+<form id="form_solicitacao" name="form_solicitacao" class="form-horizontal container-fluid" role="form">
+    <div  class="column-container">
+        <!-- DADOS DO SOLICITADOR -->
+        <div>
+            <h4 class="col-12">DADOS PARA AS SOLICITAÇÕES</h4>
+            <hr>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    email:
+                </label>
+                <input class="form-control" 
+                cam-variable-name="solProtocEmail" 
+                cam-variable-type="String"
+                >
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Nome Completo:
+                </label>
+                <input class="form-control" 
+                cam-variable-name="solProtocNomeCompleto" 
+                cam-variable-type="String"
+                >
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Telefone:
+                </label>
+                <input class="form-control" 
+                cam-variable-name="solProtocTelefone" 
+                cam-variable-type="String"
+                >
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Prioridade:
+                </label>
+                <input class="form-control" 
+                cam-variable-name="solProtocPrioridade" 
+                cam-variable-type="String"
+                >
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Departamento:
+                </label>
+                <input class="form-control" 
+                cam-variable-name="solProtocDepartamento" 
+                cam-variable-type="String"
+                >
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Instituição Referência:
+                </label>
+                <input class="form-control" 
+                cam-variable-name="solProtocInstRefer" 
+                cam-variable-type="String"
+                >
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Projeto:
+                </label>
+                <input class="form-control" 
+                cam-variable-name="solProtocProjeto" 
+                cam-variable-type="String"
+                >
+            </div>
+        </div>
+        <!-- / DADOS DO SOLICITADOR -->
+        <br>
+        <br>
+        <!-- SOLICITAÇÃO DE TRANSPORTE -->
+        <div>
+            <h4>Realizar Solicitações via Protocolo para Aluguel do(s) Transporte(s)</h4>
+            <hr>
+            <div class="col-12 mt-3 mb-3">
+                <label for="tipoTransporte">Selecione o Tipo de Transporte</label>
+                <select class="form-control"
+                id="tipoTransporte"
+                onchange="ShowHide()"
+                cam-variable-name="tipoSolTransporte"
+                cam-variable-type="String"
+                name="tipoTransporte">
+                    <option value="naoSeAplica" selected>Não se aplica</option>
+                    <option value="veiculo">Aluguel de Veículo</option>
+                    <option value="servico">Serviço de Transporte</option>
+                    <option value="passagem">Compra de Passagem</option>
+                </select>
+            </div>
+            <div class="col-12 mt-3 mb-3">
+                <label class="control-label">
+                    Justificativa da Necessidade:
+                </label>
+                <input 
+                class="form-control" 
+                cam-variable-name="aluguelTranspJustificativa" 
+                cam-variable-type="String"
+                >
+            </div>
+            <br>
+            <!-- SOLICITAÇÃO DE TRANSPORTE: ALUGUEL DE VEÍCULO -->
+            <div id="aluguelVeiculoContainer">
+                <h5>Solicitação de ALuguel de Veículo: Dados do Motorista Habilitado
+                </h5>
+                <hr>
+                <div class="col-12 mt-3">
+                    <label class="control-label">
+                        Nome Completo:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoNomeCompleto" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CPF:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoCpf" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Cargo/Função:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoCargo" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Nascimento:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoNascimento" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        RG:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoRg" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Órgão Emissor:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoOrgaoEm" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Endereço:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoEndereco" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CEP:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoCep" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoEmail" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Telefone:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoTelefone" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Cronograma da Viagem:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoCronogViagem" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Instituição de Referência:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoInstRef" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Link CNH:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoLinkCnh" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Local/horário de retirada e entrega do veículo:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadolocalHorVeiculo" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label for="contratarAdicional">Contratar motorista adicional?</label>
+                    <select class="form-control"
+                    cam-variable-name="contratarMotoristaAdicional"
+                    cam-variable-type="String"
+                    name="contratarAdicional">
+                        <option value="nao" selected>Não</option>
+                        <option value="sim"> Sim</option>
+                    </select>
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Descrição do veículo a ser contratado:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="MotoristaHabilitadoDescVeiculo" 
+                    cam-variable-type="String"
+                    >
+                </div>
+            </div>
+            <!-- / SOLICITAÇÃO DE TRANSPORTE: ALUGUEL DE VEÍCULO -->
+            <hr>
+            <!-- SOLICITAÇÃO DE TRANSPORTE: CONTRATAÇÃO DE SERVIÇO-->
+            <div id="contratServicoContainer">
+                <h5>Realizar solicitações via protocolo de contratação de serviço
+                </h5>
+                <hr>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Justificativa da Necessidade:
+                    </label>
+                    <textarea  class="form-control" 
+                    cam-variable-name="contratServJustNecesside" 
+                    cam-variable-type="String"
+                    ></textarea>
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Data e local com endereço completo (Rua, nº, quadra, lote, edifício, andar, CEP) para execução do serviço.:
+                    </label>
+                    <textarea  class="form-control" 
+                    cam-variable-name="contratServLocalExecucao" 
+                    cam-variable-type="String"
+                    ></textarea>
+                </div>
+            </div>
+            <!-- / SOLICITAÇÃO DE TRANSPORTE: CONTRATAÇÃO DE SERVIÇO-->
+            <hr>
+            <!-- / SOLICITAÇÃO DE TRANSPORTE: COMPRA DE PASSAGEM-->
+            <div id="comprarPassagemContainer">
+                <h5>Realizar solicitações via protocolo para compra das pasagens para viagem
+                </h5>
+                <hr>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Nome Completo:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassNomeCompleto" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CPF:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassCpf" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Cargo/Função:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassCargo" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Nascimento:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassNascimento" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        RG:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassRg" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Órgão Emissor:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassOrgaoEmissor" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Endereço:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassEndereco" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CEP:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassCep" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassEmail" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Telefone:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassTelefone" 
+                    cam-variable-type="String">
+                </div>
+                <hr>
+                <h5 class="mt-3">Dados Bancários
+                </h5>
+                <hr>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Banco:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassBanco" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Agência:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassAgencia" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Conta com dígito:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassConta" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Pix:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassPix" 
+                    cam-variable-type="String">
+                </div>
+                <hr>
+                <h6 class="mt-3">Cronograma da viagem
+                </h6>
+                <hr>
+                <h6 class="mt-3">Saída
+                </h6>
+                <hr>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Data:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassCronogSaidaData" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Hora:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassCronogSaidaHora" 
+                    cam-variable-type="String">
+                </div>
+                <hr>
+                <h6 class="mt-3">Retorno
+                </h6>
+                <hr>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Data:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassCronogRetornoData" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Hora:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassCronogRetornoHora" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Link RG/CNH:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="compraPassLinkRgCnh" 
+                    cam-variable-type="String">
+                </div>
+            </div>
+            <!-- / SOLICITAÇÃO DE TRANSPORTE: COMPRA DE PASSAGEM-->
+        </div>
+        <!-- / SOLICITAÇÃO DE TRANSPORTE -->
+        
+        <!-- SOLICITAÇÃO DE DIARIAS -->
+        <div>
+            <br>
+            <br>
+            <h4>Solicitação de Diárias - Professores e Equipe de Execução
+            </h4>
+            <hr>
+            <div class="form-group">
+                <label for="SolDiariasProfessorSelect">Escolha o professor</label>
+                <select class="form-control"
+                cam-variable-name="SolDiariasProfessorSelect"
+                cam-variable-type="String"
+                name="SolDiariasProfessorSelect">
+                    <option value="ELAINE TAVARES" selected>ELAINE TAVARES</option>
+                    <option value="ELIZETE MARTINS DA SILVA"> ELIZETE MARTINS DA SILVA</option>
+                    <option value="FATIMA RICARDO DA SILVA"> FATIMA RICARDO DA SILVA</option>
+                    <option value="LEIDIANE BARBOSA CHAVES"> LEIDIANE BARBOSA CHAVES</option>
+                    <option value="LIDECY DE JESUS DE MORAIS"> LIDECY DE JESUS DE MORAIS</option>
+                    <option value="LUCAS EDUARDO DE SOUZA BOTELHO"> LUCAS EDUARDO DE SOUZA BOTELHO</option>
+                    <option value="LUCIO BORGES DO NASCIMENTO"> LUCIO BORGES DO NASCIMENTO</option>
+                    <option value="MARCIA HELENA DE PAULA"> MARCIA HELENA DE PAULA</option>
+                    <option value="MATHEUS CANDIDO DE OLIVEIRA"> MATHEUS CANDIDO DE OLIVEIRA</option>
+                    <option value="NILZA MARTINS SILVA ANDRADE"> NILZA MARTINS SILVA ANDRADE</option>
+                    <option value="PABLO MACEDO SANTOS"> PABLO MACEDO SANTOS</option>
+                    <option value="VANNESSA COSTA E VINICIUS MARQUES DE PAULA MARTINS SILVA ANDRADE"> NILZA MARTINS SILVA ANDRADE</option>
+                    <option value="SOLICITAR RPA"> SOLICITAR RPA</option>
+                </select>
+            </div>
+            <br>
+
+            <div>
+                <h5 class="mt-3">Solicitação Professor
+                </h5>
+                <hr>
+                <div class="col-12 mt-3">
+                    <label class="control-label">
+                        Justificativa:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfJustificativa" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Nome Completo:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfNomeCompleto" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CPF:
+                    </label>
+                    <input class="form-control" 
+                    id="solDiariasProfCpf"
+                    cam-variable-name="solDiariasProfCpf" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Cargo/Função:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfCargo" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Nascimento:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfNascimento" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        RG:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfRg" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Orgão Emissor:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfOrgaoEmissor" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Endereço:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfEndereco" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CEP:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfCep" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfEmail" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfTelefone" 
+                    cam-variable-type="String">
+                </div>
+                <br>
+                <h5 class="mt-3">Dados Bancários
+                </h5>
+                <hr>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Banco:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfBanco" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Agência:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfAgencia" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Conta com Digito:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfConta" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Pix:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfPix" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Cronograma da Viagem:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfCronogramaViagem" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Instituição de referência:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasProfInstReferencia" 
+                    cam-variable-type="String">
+                </div>
+                <!-- SOLICITAÇÃO DE DIARIAS -->
+                <div>
+                    <div id="formsDiv">
+                        <h3>Solicitação Auxiliar Extensão:</h3>
+                        <hr>
+                    </div>
+                    <div class="btn-custom mt-3" 
+                    ng-click="addForm()" >ADICINAR AUXILIAR</div>
+                </div>
+                <!-- / SOLICITAÇÃO DE DIARIAS -->
+                            <!-- SOLICITAÇÃO DE DIARIAS: MOTORISTA -->
+            <div>
+                <br>
+                <h5 class="mt-3">Solicitação Motorista
+                </h5>
+                <hr>
+                <div class="col-12 mt-3">
+                    <label class="control-label">
+                        Justificativa:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaJustificativa" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Nome Completo:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaNomeCompleto" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CPF:
+                    </label>
+                    <input class="form-control"
+                    id="solDiariasMotoristaCpf" 
+                    cam-variable-name="solDiariasMotoristaCpf" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Cargo/Função:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaCargo" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Nascimento:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaNascimento" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        RG:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaRg" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Orgão Emissor:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaOrgaoEmissor" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Endereço:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaEndereco" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        CEP:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaCep" 
+                    cam-variable-type="String"
+                    >
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaEmail" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Telefone:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaTelefone" 
+                    cam-variable-type="String">
+                </div>
+                <br>
+                <h5 class="mt-3">Dados Bancários
+                </h5>
+                <hr>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Banco:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaBanco" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Agência:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaAgencia" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Conta com Digito:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaConta" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Pix:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaPix" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Cronograma da Viagem:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaCronogramaViagem" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <label class="control-label">
+                        Instituição de referência:
+                    </label>
+                    <input class="form-control" 
+                    cam-variable-name="solDiariasMotoristaInstReferencia" 
+                    cam-variable-type="String">
+                </div>
+                <div class="mt-3 col-12">
+                    <input class="form-check-input" 
+                    type="checkbox"
+                    cam-variable-name="confSolDiariasMotorista" 
+                    cam-variable-type="Boolean">
+                    <label class="form-check-label">
+                        CONFIRMAR SOLICITAÇÃO DE DIÁRIAS
+                    </label>
+                </div>
+            </div>
+            <!-- SOLICITAÇÃO DE DIARIAS: MOTORISTA -->
+            </div>
+
+        <!-- / SOLICITAÇÃO DE DIARIAS -->
+    </div>
+    
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <script>
+        let ShowHide = function () {	
+            console.log("dentro")	
+            let selectTransportValue = document.getElementById('tipoTransporte').value								// We make a function named "ShowHide".
+            aluguelVeiculo = selectTransportValue == "veiculo";							// Inside the "ShowHide" function the value of the variable "IsVisible" is reversed. 	
+            contratServico = selectTransportValue == "servico";							// Inside the "ShowHide" function the value of the variable "IsVisible" is reversed. 	
+            comprarPassagem = selectTransportValue == "passagem";
+            
+            let aluguelVeiculoContainer = document.getElementById('aluguelVeiculoContainer')
+            let contratServicoContainer = document.getElementById('contratServicoContainer')
+            let comprarPassagemContainer = document.getElementById('comprarPassagemContainer')
+
+            if(aluguelVeiculo) {
+                aluguelVeiculoContainer.style.display = "block"
+            } else {
+                aluguelVeiculoContainer.style.display = "none"
+            }
+            
+            if(contratServico) {
+                contratServicoContainer.style.display = "block"
+            } else {
+                contratServicoContainer.style.display = "none"
+            }
+            
+            if(comprarPassagem) {
+                comprarPassagemContainer.style.display = "block"
+            } else {
+                comprarPassagemContainer.style.display = "none"
+            }
+        }
+
+        ShowHide()
+    </script>
+</form>

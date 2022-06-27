@@ -1,0 +1,208 @@
+<style>
+    .btn-custom {
+        padding: 5px 10px;
+        background-color: lightgray;
+        display: inline-block;
+    }
+
+    .btn-custom:hover {
+        cursor: pointer ;
+        background-color: #ededed;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .mt-3 {
+        margin-top: 12px;
+    }
+</style>
+
+<!-- NOMES VARIAVEIS -->
+<!-- 
+    VARIAVEIS:
+    reqInsumoKitsNomeSolicitante
+    reqInsumoKitsDataEntrega
+    reqInsumoKitsLocalEntrega
+    reqInsumoKitsNomeReceptor
+    reqInsumoKitsItemNome
+    reqInsumoKitsItemDescricao
+    qtdItemsSolicitacaoInsumoKits
+-->
+<!-- / NOMES VARIAVEIS -->
+<form ng-app="test" id="form_solicitacao" name="form_solicitacao" class="form-horizontal container-fluid" role="form">
+    <div  class="column-container">
+        <!-- FORMULARIO -->
+        <div>
+            <h4 class="col-12">Solicitação de Insumos</h4>
+            <hr>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Nome Solicitante:
+                </label>
+                <input class="form-control" 
+                value="Kaike batista da silva"
+                cam-variable-name="reqInsumoKitsNomeSolicitante" 
+                cam-variable-type="String">
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Data de Entrega:
+                </label>
+                <input class="form-control" 
+                value="21/05/2022"
+                cam-variable-name="reqInsumoKitsDataEntrega" 
+                cam-variable-type="String">
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Local de Entrega:
+                </label>
+                <input class="form-control" 
+                value="rua 250 numero 32 setor coimbra, Goiania GO"
+                cam-variable-name="reqInsumoKitsLocalEntrega" 
+                cam-variable-type="String">
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Nome do Recceptor:
+                </label>
+                <input class="form-control" 
+                value="João da silva"
+                cam-variable-name="reqInsumoKitsNomeReceptor" 
+                cam-variable-type="String">
+            </div>
+            <!-- <div class="mt-3 col-12">
+                <label class="control-label">
+                    Periodo De entrega:
+                </label>
+                <input class="form-control" 
+                value="1"
+                cam-variable-name="reqInsumoKitsPeriodoEntrega" 
+                cam-variable-type="String">
+            </div> -->
+            <br>
+            <br>
+            <div id="itemsContainer">
+                <div>
+                    <h4 class="col-12">Itens</h4>
+                </div>
+            </div>
+            <div class="btn-custom" ng-click="addForm()">ADICIONAR ITEM</div>
+        </div>
+        <!-- <button ng-click="simulateSubmit(); return false" type="button">completar</button> -->
+        <!-- / FORMULARIO -->
+    </div>
+    
+    <script  cam-script type="text/form-script">
+        let inputs = [
+            {
+                inputName: "reqInsumoKitsItemNome",
+                inputLabel: "Nome:",
+                type: "input",
+            },
+            {
+                inputName: "reqInsumoKitsItemDescricao",
+                inputLabel: "Descrição:",
+                type: "textarea",
+            },
+        ] 
+
+        let inputsiDS = []
+        let count = 0
+
+        $scope.addForm = function() {
+            count++
+            let formDiv = document.getElementById('itemsContainer')
+            
+            let container = document.createElement("div");
+
+            inputs.forEach(function(formControl, i) {
+                let inputCreated = createInputElement(
+                    formControl.inputName+count,
+                    formControl.inputLabel,
+                    formControl.type
+                )
+                
+                container.appendChild(inputCreated)
+                inputsiDS.push(formControl.inputName+count)
+            })
+            let hr = document.createElement("hr");
+            formDiv.appendChild(hr)
+            formDiv.appendChild(container)
+        }
+
+        function createBankInfoLabel() {
+
+            var bankInfoLabelContainer = document.createElement("div");
+            bankInfoLabelContainer.classList.add("mt-3");
+
+
+            var banckInfoLabel = document.createElement("h4");
+            banckInfoLabel.innerHTML = "Dados Bancários Auxiliar "+ count+":"
+            
+            var banckInfoHr = document.createElement("hr");
+
+            bankInfoLabelContainer.appendChild(banckInfoLabel)
+            bankInfoLabelContainer.appendChild(banckInfoHr)
+            return bankInfoLabelContainer
+        }
+
+        function createInputElement(
+            inputId, 
+            inputLabel,
+            type="input"
+        ) { 
+            let input = document.createElement(type);
+            input.setAttribute("type", "text");
+            input.setAttribute("name", inputId);
+            input.setAttribute("id", inputId);
+            input.classList.add("form-control");
+            
+            if (type == "textarea") input.innerHTML = "camiseta com numero "+ count
+            else input.value = count+"camiseta"+count;
+
+            let container = document.createElement("div");
+
+            let label = document.createElement("Label");
+            label.classList.add("control-label");
+            label.style = "margin-top: 16px;";
+            label.innerHTML = inputLabel
+            label.setAttribute("for",  inputId)
+            
+
+            container.appendChild(label)
+            container.appendChild(input)
+            return container
+        }
+
+        var variableManager = camForm.variableManager;
+        camForm.on('submit', function() {
+
+            inputsiDS.forEach(function(formId, i) {
+                let formControl = document.getElementById(formId)
+                variableManager.createVariable({
+                    name: formId,
+                    type: 'String',
+                    value: formControl.value,
+                    isDirty: true
+                });
+            })
+
+            variableManager.createVariable({
+                name: "qtdItemsSolicitacaoInsumoKits",
+                type: 'String',
+                value: count,
+                isDirty: true
+            });
+    
+        });
+
+        $scope.addForm()
+    </script>
+</form>

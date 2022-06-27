@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1lwolds" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="Process_0y8tamy" name="ChecagemKitsProcess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0a72uub</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0a72uub" sourceRef="StartEvent_1" targetRef="Activity_1x74gdr" />
+    <bpmn:sequenceFlow id="Flow_0j0ww62" sourceRef="Activity_1x74gdr" targetRef="Activity_16vuq1g" />
+    <bpmn:sequenceFlow id="Flow_13gj0ws" sourceRef="Activity_16vuq1g" targetRef="Activity_04ji6xr" />
+    <bpmn:sequenceFlow id="Flow_1mdf6ux" sourceRef="Activity_04ji6xr" targetRef="Activity_0x3sew5" />
+    <bpmn:endEvent id="Event_14d5ejt">
+      <bpmn:incoming>Flow_0krpi0c</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0krpi0c" sourceRef="Activity_0x3sew5" targetRef="Event_14d5ejt" />
+    <bpmn:userTask id="Activity_1x74gdr" name="preenchimento dos kits" camunda:formRef="MontagemDeKits" camunda:formRefBinding="latest">
+      <bpmn:incoming>Flow_0a72uub</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j0ww62</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_16vuq1g" name="preenchimento dos kits 2" camunda:formRef="ChecagemDeKitsDeInsumos" camunda:formRefBinding="latest">
+      <bpmn:incoming>Flow_0j0ww62</bpmn:incoming>
+      <bpmn:outgoing>Flow_13gj0ws</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_04ji6xr" name="recebimento de kits" camunda:formKey="embedded:deployment:checagemEntregaKits.html">
+      <bpmn:incoming>Flow_13gj0ws</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mdf6ux</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0x3sew5" name="variaveis disponiveis">
+      <bpmn:incoming>Flow_1mdf6ux</bpmn:incoming>
+      <bpmn:outgoing>Flow_0krpi0c</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0y8tamy">
+      <bpmndi:BPMNEdge id="Flow_0a72uub_di" bpmnElement="Flow_0a72uub">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j0ww62_di" bpmnElement="Flow_0j0ww62">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13gj0ws_di" bpmnElement="Flow_13gj0ws">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="600" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mdf6ux_di" bpmnElement="Flow_1mdf6ux">
+        <di:waypoint x="700" y="117" />
+        <di:waypoint x="770" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0krpi0c_di" bpmnElement="Flow_0krpi0c">
+        <di:waypoint x="870" y="117" />
+        <di:waypoint x="942" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14d5ejt_di" bpmnElement="Event_14d5ejt">
+        <dc:Bounds x="942" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s4x72k_di" bpmnElement="Activity_1x74gdr">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u7yfoi_di" bpmnElement="Activity_16vuq1g">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0h3hz6d_di" bpmnElement="Activity_04ji6xr">
+        <dc:Bounds x="600" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wl6qc0_di" bpmnElement="Activity_0x3sew5">
+        <dc:Bounds x="770" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

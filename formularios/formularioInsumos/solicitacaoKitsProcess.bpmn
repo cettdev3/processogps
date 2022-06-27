@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1evllei" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="Process_1lg62vq" name="solicitacaoInsumosKits" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1lexlo9</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_1g1mlkf" name="form solicitação kits" camunda:formKey="embedded:deployment:insumosKitsSolicitacaoForm.html">
+      <bpmn:incoming>Flow_1wc8avm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0swdy8l</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0swdy8l" sourceRef="Activity_1g1mlkf" targetRef="Activity_040sdur" />
+    <bpmn:serviceTask id="Activity_040sdur" name="enviar jomla" camunda:type="external" camunda:topic="enviarJumlaLocal">
+      <bpmn:incoming>Flow_0swdy8l</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g51ixb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0g51ixb" sourceRef="Activity_040sdur" targetRef="Activity_0rlo5db" />
+    <bpmn:userTask id="Activity_0rlo5db" name="id disponivel">
+      <bpmn:incoming>Flow_0g51ixb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nnpc2j</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1lexlo9" sourceRef="StartEvent_1" targetRef="Activity_0fgcq35" />
+    <bpmn:userTask id="Activity_0fgcq35" name="form solicitacoes" camunda:formKey="embedded:deployment:camSolicitacaoForm.html">
+      <bpmn:incoming>Flow_1lexlo9</bpmn:incoming>
+      <bpmn:outgoing>Flow_123rlkj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_123rlkj" sourceRef="Activity_0fgcq35" targetRef="Activity_1a6wdbx" />
+    <bpmn:serviceTask id="Activity_1a6wdbx" name="enviar solicitacoes jumls" camunda:type="external" camunda:topic="enviarJumlaLocal">
+      <bpmn:incoming>Flow_123rlkj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wc8avm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1wc8avm" sourceRef="Activity_1a6wdbx" targetRef="Activity_1g1mlkf" />
+    <bpmn:endEvent id="Event_05uxsst">
+      <bpmn:incoming>Flow_0nnpc2j</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0nnpc2j" sourceRef="Activity_0rlo5db" targetRef="Event_05uxsst" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1lg62vq">
+      <bpmndi:BPMNEdge id="Flow_0swdy8l_di" bpmnElement="Flow_0swdy8l">
+        <di:waypoint x="670" y="117" />
+        <di:waypoint x="710" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g51ixb_di" bpmnElement="Flow_0g51ixb">
+        <di:waypoint x="810" y="117" />
+        <di:waypoint x="870" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lexlo9_di" bpmnElement="Flow_1lexlo9">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_123rlkj_di" bpmnElement="Flow_123rlkj">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="410" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wc8avm_di" bpmnElement="Flow_1wc8avm">
+        <di:waypoint x="510" y="117" />
+        <di:waypoint x="570" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nnpc2j_di" bpmnElement="Flow_0nnpc2j">
+        <di:waypoint x="970" y="117" />
+        <di:waypoint x="1032" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yk0789_di" bpmnElement="Activity_0fgcq35">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18sb2j2_di" bpmnElement="Activity_0rlo5db">
+        <dc:Bounds x="870" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gsvkcf_di" bpmnElement="Activity_040sdur">
+        <dc:Bounds x="710" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06l3dsk_di" bpmnElement="Activity_1g1mlkf">
+        <dc:Bounds x="570" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_05uxsst_di" bpmnElement="Event_05uxsst">
+        <dc:Bounds x="1032" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0oxvfp3_di" bpmnElement="Activity_1a6wdbx">
+        <dc:Bounds x="410" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

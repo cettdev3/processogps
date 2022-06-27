@@ -1,0 +1,191 @@
+<!-- NOMES VARIAVEIS -->
+<!-- 
+    VARIAVEIS:
+    ColetesEnviados
+    FormulariosEnviados
+    field_0vf190b
+    FichasEnviadas
+    UniformesEnviados
+    EnviadasApostilas
+    CrachasEnviados
+    CadernosEnviados
+    CanetasEnviadas
+    MascarasEnviadas
+    MascarasEmEnviados
+-->
+<!-- / NOMES VARIAVEIS -->
+<style>
+    .btn-custom {
+        padding: 5px 10px;
+        background-color: lightgray;
+        display: inline-block;
+    }
+
+    .btn-custom:hover {
+        cursor: pointer ;
+        background-color: #ededed;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .mt-3 {
+        margin-top: 12px;
+    }
+
+    .mr-3 {
+        margin-right: 16px!important;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .f-column {
+        flex-direction: column;
+    }
+
+    .jc-start {
+        justify-content: flex-start;
+    }
+
+
+    .ai-start {
+        align-items: flex-start;
+    }
+</style>
+<form id="form_solicitacao" name="form_solicitacao" class="form-horizontal container-fluid" role="form">
+    <div>
+        <h1 id="labelIdsForm">Checagem da Entrega de Kit Aluno/Professor</h1>
+    </div>
+    <hr>
+    
+    <div id="itemsContainer">
+                    
+    </div>
+    <div class="col-12 mt-3">
+        <label class="control-label">
+            Link do Drive Com Imagens/Vídeos da Chegada dos Kits:
+        </label>
+        <input  
+        class="form-control" 
+        cam-variable-name="checagemEntregaKitsLinkDrive" 
+        cam-variable-type="String">
+    </div>
+    <div class="col-12 mt-3 mb-3">
+        <label for="tipoTransporte">Confirma chegada dos Kits?</label>
+        <select class="form-control"
+        cam-variable-name="confirmarChegadaDeInsumos"
+        cam-variable-type="String"
+        name="tipoTransporte">
+            <option value="sim" selected>sim</option>
+            <option value="nao">não</option>
+        </select>
+    </div>
+    <script cam-script type="text/form-script">
+        let variableManager = camForm.variableManager;
+        let variables = [
+            {name: "ColetesEnviados", label: "Coletes Enviados"},
+            {name: "FormulariosEnviados", label: "Formulários Socioeconômicos  Enviados" },
+            {name: "field_0vf190b", label: "Formularios de Uso de imagem em Enviados" },
+            {name: "FichasEnviadas", label: "Fichas de Avaliação Enviadas"},
+            {name: "UniformesEnviados", label: "Uniformes Enviados"},
+            {name: "EnviadasApostilas", label: "Apostilas Enviadas"},
+            {name: "CrachasEnviados", label: "Crachás Enviados"},
+            {name: "CadernosEnviados", label: "Cadernos Enviados"},
+            {name: "CanetasEnviadas", label: "Canetas Enviadas"},
+            {name: "MascarasEnviadas", label: "Máscaras de Certificado Enviadas"},
+            {name: "MascarasEmEnviados", label: "Kits em estoque"},
+        ]
+        let inputsiDS = []
+        
+        let addForm = function(variableData) {
+            let formDiv = document.getElementById('itemsContainer')
+            
+            let container = document.createElement("div");
+            container.classList.add("d-flex")
+            container.classList.add("jc-start")
+            container.classList.add("ai-start")
+
+            let inputId = "checkBox"+variableData.name
+            let inputCreated = createInputElement(
+                inputId,
+                "checkbox"
+            )
+
+            inputsiDS.push(inputId)
+            let value = variableData.value
+            let valueDescription = variableData.label    
+            let checkBoxContent = createCheckContent(value, valueDescription)
+
+            container.appendChild(inputCreated)
+            container.appendChild(checkBoxContent)
+            let hr = document.createElement("hr");
+            formDiv.appendChild(container)
+            formDiv.appendChild(hr)
+        }
+
+        function createSpan(label, value) {
+            var span = document.createElement("span");
+            span.innerHTML = label + " "+value
+
+            return span
+        }
+
+        function createCheckContent(value, valueDescription) {
+            
+            let contentContainer = document.createElement("div");
+            contentContainer.classList.add("d-flex");
+            contentContainer.classList.add("jc-start");
+            contentContainer.classList.add("ai-start");
+
+            let spanName = createSpan(value, valueDescription)
+            contentContainer.appendChild(spanName)
+            return contentContainer
+        }
+
+        function createInputElement(
+            inputId, 
+            type="input"
+        ) { 
+            let input = document.createElement("input");
+            input.setAttribute("id", inputId);
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("required", true);
+            input.classList.add("mr-3");
+            
+            return input
+        }
+
+        camForm.on('form-loaded', function() {
+            variables.forEach(function(variable) {
+                variableManager.fetchVariable(variable.name);
+            })   
+        });
+
+        camForm.on('variables-fetched', function() {
+            variables.forEach(function(variable) {
+                variable.value = variableManager.variableValue(variable.name); 
+                addForm(variable)    
+            })
+        })
+
+        camForm.on('submit', function() {
+
+            inputsiDS.forEach(function(formId, i) {
+                let formControl = document.getElementById(formId)
+                variableManager.createVariable({
+                    name: formId,
+                    type: 'String',
+                    value: formControl.checked,
+                    isDirty: true
+                });
+            })
+        });
+    </script>
+</form>

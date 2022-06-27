@@ -1,0 +1,14 @@
+a solicitação de transporte pode ser de tres tipos, mas apenas um tipo eh preenchido 
+em um processo?
+
+O titulo da solicitação de trasporte esta no plural, issi]o significa que pode haver mais de um tipo
+de solicitação de trasporte ou que pode haver varias solicitações para o mesmo tipo ou os dois?
+
+A opção de contratar motorista adicianal, se sim, os dados desse motorista adicional devem ser
+coletados da mesma forma que os dados do motorista? caso sim, exite algum dade diferente para o
+motorista adicional? quantos motoristas adicionais podem ser contratados, 1, 2, 3?
+
+Instituição de referencia nao eh utilizado no formulario de solicitação de aluguel de veiculo
+link da cnh nao eh utilizado no formulario de solicitação de aluguel de veiculo
+
+Porque tem boaIluminacao no nome da variavel

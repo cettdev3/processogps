@@ -1,0 +1,121 @@
+{
+  "components": [
+    {
+      "text": "<hr>\n# ► Montagem de Kits Aluno/Professor\n<hr>",
+      "type": "text",
+      "id": "Field_0p3zt7s"
+    },
+    {
+      "label": "QTD de Coletes Enviados:",
+      "type": "textfield",
+      "id": "Field_08j5d0z",
+      "key": "ColetesEnviados",
+      "disabled": false,
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Formulários Socioeconômicos  Enviados:",
+      "type": "textfield",
+      "id": "Field_02a648k",
+      "key": "FormulariosEnviados",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Formularios de Uso de imagem em Enviados:",
+      "type": "textfield",
+      "id": "Field_19a6gks",
+      "key": "field_0vf190b",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Fichas de Avaliação Enviadas:",
+      "type": "textfield",
+      "id": "Field_0fe0azf",
+      "key": "FichasEnviadas",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Uniformes Enviados:",
+      "type": "textfield",
+      "id": "Field_0sedt2p",
+      "key": "UniformesEnviados",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Apostilas Enviadas:",
+      "type": "textfield",
+      "id": "Field_166fzcy",
+      "key": "EnviadasApostilas",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Crachás Enviados:",
+      "type": "textfield",
+      "id": "Field_1wjqoci",
+      "key": "CrachasEnviados",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Cadernos Enviados:",
+      "type": "textfield",
+      "id": "Field_1iqy0hg",
+      "key": "CadernosEnviados",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Canetas Enviadas:",
+      "type": "textfield",
+      "id": "Field_1fp9cev",
+      "key": "CanetasEnviadas",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "QTD de Máscaras de Certificado Enviadas:",
+      "type": "textfield",
+      "id": "Field_0kz5yi8",
+      "key": "MascarasEnviadas",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "values": [
+        {
+          "label": "Solicitar Kits",
+          "value": "SolicitarKits"
+        }
+      ],
+      "label": "Solicitar Kits",
+      "type": "radio",
+      "id": "Field_1425h2x",
+      "key": "SolicitarKits"
+    }
+  ],
+  "type": "default",
+  "id": "MontagemDeKits",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

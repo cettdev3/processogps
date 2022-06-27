@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let variables = [
+            {name: "teste1", label: "labelteste1"},
+            {name: "teste2", label: "labelteste2"},
+            {name: "teste3", label: "labelteste3"},
+            {name: "teste4", label: "labelteste4"},
+            {name: "teste5", label: "labelteste5"},
+        ]
+        
+        let inputs = []
+        console.log(variables.formName1)
+        variables.forEach(function(variable) {
+            variable.value = variable.name + variable.value + "teste"
+        }) 
+        console.log(variables)
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<button onclick="sendRequest()">click end request</button>
+	<script>
+		function sendRequest() {
+
+			let xhr = new XMLHttpRequest();
+			   xhr.open("POST", "https://protocolo2.cett.dev.br/plugins/jssupportticket/js_support_ticket_API/js_support_ticket_API.php");
+
+   
+			   xhr.onload = () => console.log(xhr.responseText);
+			   let obj = {
+					"authentication": {
+					   "api_key": "4157603089f949dcb76aea92088823e0",
+					   "api_secret": "20d4a4959a421a4615d8f7aca545a0457800354268559e3ed3fc724ef1dc8c29"
+				   },
+				   "data": {
+					   "email": "diegosantos.2001@alunos.utfpr.edu.br",
+					   "priorityid": "3",
+					   "name": "Diego Godina Santos",
+					   "phone": "13996437301",
+					   "departmentid": "27",
+					   "projeto": "EFG",
+					   "instituicao": "site",
+					   "subject": "Teste",
+					   "message": "Demanda de teste da API",
+					   "etapa": "Cadastrado",
+					   "limite_execucao": "2022-06-10",
+				   }				   
+				}
+
+			   	response = xhr.send(JSON.stringify(obj));
+			   	// console.log(response)
+		}
+	</script>
+</body>
+</html>
+
+<!-- 
+					let array = []
+				let authetication =  {
+					api_key: '4157603089f949dcb76aea92088823e0',
+					api_secret: '20d4a4959a421a4615d8f7aca545a0457800354268559e3ed3fc724ef1dc8c29'
+				}
+				let datajson =   {
+					email: 'diegosantos.2001@alunos.utfpr.edu.br',
+					priorityid: '3',
+					name: 'Diego Godina Santos',
+					phone: '13996437301',
+					departmentid: '27',
+					projeto: 'EFG',
+					instituicao: 'site',
+					subject: 'Teste',
+					message: 'Demanda de teste da API',
+					etapa: 'Cadastrado',
+					limite_execucao: '2022-06-10',
+				}
+				// authetication = JSON.stringify(authetication)
+				// datajson = JSON.stringify(datajson)
+				let data = []
+				data ["authentication"] =  authetication
+				data ["data"] =  datajson
+				console.log(authetication)
+				console.log(datajson)
+				console.log(data)
+			   
+
+-->

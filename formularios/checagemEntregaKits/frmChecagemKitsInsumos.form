@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "text": "<hr>\n# ► Checagem de Kits em estoque\n<hr>",
+      "type": "text",
+      "id": "checagemKitsDeInsumos"
+    },
+    {
+      "values": [
+        {
+          "value": "Confeitaria",
+          "label": "Confeitaria"
+        },
+        {
+          "value": "Barbearia",
+          "label": "Barbearia"
+        },
+        {
+          "value": "Corte e Costura",
+          "label": "Corte e Costura"
+        },
+        {
+          "value": "Massoterapia",
+          "label": "Massoterapia"
+        },
+        {
+          "value": "Maquiagem",
+          "label": "Maquiagem"
+        },
+        {
+          "value": "Massas e Molhos",
+          "label": "Massas e Molhos"
+        },
+        {
+          "value": "Infomática Básica",
+          "label": "Infomática Básica"
+        }
+      ],
+      "label": "Curso",
+      "type": "select",
+      "id": "Field_1hpzh4r",
+      "key": "field_06jd5ys"
+    },
+    {
+      "label": "QTD de Kits em estoque:",
+      "type": "textfield",
+      "id": "Field_0kz5yi8",
+      "key": "MascarasEmEnviados"
+    },
+    {
+      "values": [
+        {
+          "label": "Solicitar",
+          "value": "solicitar"
+        }
+      ],
+      "label": "Solicitar Reposição no Protocolo ?",
+      "type": "radio",
+      "id": "Field_16kmhc9",
+      "key": "SolicitarKitsdeInsumos"
+    }
+  ],
+  "type": "default",
+  "id": "ChecagemDeKitsDeInsumos",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

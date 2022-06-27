@@ -1,0 +1,307 @@
+<style>
+    .btn-custom {
+        padding: 5px 10px;
+        background-color: lightgray;
+        display: inline-block;
+    }
+
+    .btn-custom:hover {
+        cursor: pointer ;
+        background-color: #ededed;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .mt-3 {
+        margin-top: 12px;
+    }
+
+    .mr-3 {
+        margin-right: 16px!important;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .f-column {
+        flex-direction: column;
+    }
+
+    .jc-start {
+        justify-content: flex-start;
+    }
+
+
+    .ai-start {
+        align-items: flex-start;
+    }
+</style>
+
+<!-- NOMES VARIAVEIS -->
+<!-- 
+    DADOS:
+    ColetesEnviados
+    FormulariosEnviados
+    field_0vf190b
+    FichasEnviadas
+    UniformesEnviados
+    EnviadasApostilas
+    CrachasEnviados
+    CadernosEnviados
+    CanetasEnviadas
+    MascarasEnviadas
+    MascarasEmEnviados
+-->
+<!-- / NOMES VARIAVEIS -->
+<form id="form_solicitacao" name="form_solicitacao" class="form-horizontal container-fluid" role="form">
+    <div  class="column-container">
+        <!-- FORMULARIO -->
+        <div>
+            <div>
+                <h1>Checagem da Entrega de Kit Aluno/Professor</h1>
+            </div>
+            <hr>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Coletes Enviados:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="ColetesEnviados" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Formulários Socioeconômicos  Enviados:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="FormulariosEnviados" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Formularios de Uso de imagem em Enviados:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="field_0vf190b" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Fichas de Avaliação Enviadas:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="FichasEnviadas" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Uniformes Enviados:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="UniformesEnviados" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Apostilas Enviadas:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="EnviadasApostilas" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Crachás Enviados:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="CrachasEnviados" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Cadernos Enviados:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="CadernosEnviados" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Canetas Enviadas:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="CanetasEnviadas" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Máscaras de Certificado Enviadas:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="MascarasEnviadas" 
+                cam-variable-type="String">
+            </div>
+            <div class="col-12 mt-3">
+                <label class="control-label">
+                    QTD de Kits em estoque:
+                </label>
+                <input  
+                class="form-control" 
+                cam-variable-name="MascarasEmEnviados" 
+                cam-variable-type="String">
+            </div>
+            <hr>
+            <div id="itemsContainer">
+                
+            </div>
+        </div>
+        <button onclick="simulateSubmit(); return false" type="submmit">completar</button>
+        <!-- / FORMULARIO -->
+    </div>
+    
+    <script>
+        let inputs = [
+            {
+                inputName: "reqInsumoItemNome",
+                inputLabel: "Nome:",
+                type: "input",
+            },
+            {
+                inputName: "reqInsumoItemDescricao",
+                inputLabel: "Descrição:",
+                type: "textarea",
+            },
+        ]  
+
+        let valores = [
+            "camisetas",
+            "30 camisetas pretas",
+            "copos",
+            "copo com canudo"
+        ]
+
+        let inputsiDS = []
+        count = 2
+        
+        let getInputNames = function() {
+            let variableInputs = []
+            for (let index = 1; index <= count; index++) {
+                inputs.forEach(function(formControl) {
+                    variableInputs.push(formControl.inputName + index)
+                })
+            }
+            return variableInputs
+        }
+
+        addForm = function() {
+            
+            let formDiv = document.getElementById('itemsContainer')
+            
+            
+            inputNames = getInputNames()
+            for (let index = 0; index < inputNames.length/2; index++) {
+                let container = document.createElement("div");
+                container.classList.add("d-flex")
+                container.classList.add("jc-start")
+                container.classList.add("ai-start")
+
+                let checkNumber = ((index+1)%(inputNames.length))
+                let inputCreated = createInputElement(
+                    "checkboxInsumos"+checkNumber,
+                    "checkbox"
+                )
+                inputsiDS.push("checkboxInsumos"+checkNumber)
+                let valueName = valores[index*2]
+                let valueDescription = valores[index*2 + 1]    
+                let checkBoxContent = createCheckContent(valueName, valueDescription)
+
+                container.appendChild(inputCreated)
+                container.appendChild(checkBoxContent)
+                let hr = document.createElement("hr");
+                formDiv.appendChild(container)
+                formDiv.appendChild(hr)
+            }
+
+        }
+
+        function createSpan(label, value) {
+            var span = document.createElement("span");
+            var strong = document.createElement("strong");
+            strong.innerHTML = label+": "
+            span.appendChild(strong)
+            span.innerHTML = value
+
+            return span
+        }
+
+        function createCheckContent(nameValue, descriptionValue) {
+            
+            let contentContainer = document.createElement("div");
+            contentContainer.classList.add("d-flex");
+            contentContainer.classList.add("f-column");
+            contentContainer.classList.add("jc-start");
+            contentContainer.classList.add("ai-start");
+
+            let spanName = createSpan("Nome", nameValue)
+            let spanDescricao = createSpan("Descrição", descriptionValue)
+            contentContainer.appendChild(spanName)
+            contentContainer.appendChild(spanDescricao)
+            return contentContainer
+        }
+
+        function createInputElement(
+            inputId, 
+            type="input"
+        ) { 
+            input = document.createElement("input");
+            input.setAttribute("id", inputId);
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("required", true);
+            input.classList.add("mr-3");
+            
+            return input
+        }
+
+        function simulateSubmit() {
+            inputsValues = []
+            inputsiDS.forEach(function(formId, i) {
+                let formControl = document.getElementById(formId)
+                inputsValues.push({
+                    name: formId,
+                    type: 'String',
+                    value: formControl.checked,
+                    isDirty: true
+                });
+                
+            })
+            console.log(inputsValues)
+        }
+
+        addForm()
+    </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</form>

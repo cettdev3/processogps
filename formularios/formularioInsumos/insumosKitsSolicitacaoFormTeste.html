@@ -1,0 +1,208 @@
+<style>
+    .btn-custom {
+        padding: 5px 10px;
+        background-color: lightgray;
+        display: inline-block;
+    }
+
+    .btn-custom:hover {
+        cursor: pointer ;
+        background-color: #ededed;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .mt-3 {
+        margin-top: 12px;
+    }
+</style>
+
+<!-- NOMES VARIAVEIS -->
+<!-- 
+    DADOS:
+
+-->
+<!-- / NOMES VARIAVEIS -->
+<form id="form_solicitacao" name="form_solicitacao" class="form-horizontal container-fluid" role="form">
+    <div  class="column-container">
+        <!-- FORMULARIO -->
+        <div>
+            <h4 class="col-12">Solicitação de Insumos</h4>
+            <hr>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Nome Solicitante:
+                </label>
+                <input class="form-control" 
+                value="1"
+                cam-variable-name="reqInsumoNomeSolicitante" 
+                cam-variable-type="String">
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Data de Entrega:
+                </label>
+                <input class="form-control" 
+                value="1"
+                cam-variable-name="reqInsumoDataEntrega" 
+                cam-variable-type="String">
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Local de Entrega:
+                </label>
+                <input class="form-control" 
+                value="1"
+                cam-variable-name="reqInsumoLocalEntrega" 
+                cam-variable-type="String">
+            </div>
+            <div class="mt-3 col-12">
+                <label class="control-label">
+                    Nome do Recceptor:
+                </label>
+                <input class="form-control" 
+                value="1"
+                cam-variable-name="reqInsumoNomeReceptor" 
+                cam-variable-type="String">
+            </div>
+            <!-- <div class="mt-3 col-12">
+                <label class="control-label">
+                    Periodo De entrega:
+                </label>
+                <select class="form-control"
+                value="1"
+                cam-variable-name="SolDiariasProfessorSelect"
+                cam-variable-type="String"
+                name="SolDiariasProfessorSelect">
+                    <option value="ELAINE TAVARES" selected>ELAINE TAVARES</option>
+                    <option value="ELIZETE MARTINS DA SILVA"> ELIZETE MARTINS DA SILVA</option>
+                    <option value="FATIMA RICARDO DA SILVA"> FATIMA RICARDO DA SILVA</option>
+                </select>
+            </div> -->
+            <br>
+            <br>
+            <div id="itemsContainer">
+                <div>
+                    <h4 class="col-12">Itens</h4>
+                </div>
+            </div>
+            <div class="btn-custom" onclick="addForm()">ADICIONAR ITEM</div>
+        </div>
+        <button onclick="simulateSubmit(); return false" type="button">completar</button>
+        <!-- / FORMULARIO -->
+    </div>
+    
+    <script>
+        let inputs = [
+            {
+                inputName: "reqInsumoItemNome",
+                inputLabel: "Nome:",
+                type: "input",
+            },
+            {
+                inputName: "reqInsumoItemDescricao",
+                inputLabel: "Descrição:",
+                type: "textarea",
+            },
+        ] 
+
+        let inputsiDS = []
+        count = 0
+
+        addForm = function() {
+            count++
+            let formDiv = document.getElementById('itemsContainer')
+            
+            let container = document.createElement("div");
+
+            inputs.forEach(function(formControl, i) {
+                let inputCreated = createInputElement(
+                    formControl.inputName+count,
+                    formControl.inputLabel,
+                    formControl.type
+                )
+                
+                container.appendChild(inputCreated)
+                inputsiDS.push(formControl.inputName+count)
+            })
+            let hr = document.createElement("hr");
+            formDiv.appendChild(hr)
+            formDiv.appendChild(container)
+        }
+
+        function createBankInfoLabel() {
+
+            var bankInfoLabelContainer = document.createElement("div");
+            bankInfoLabelContainer.classList.add("mt-3");
+
+
+            var banckInfoLabel = document.createElement("h4");
+            banckInfoLabel.innerHTML = "Dados Bancários Auxiliar "+ count+":"
+            
+            var banckInfoHr = document.createElement("hr");
+
+            bankInfoLabelContainer.appendChild(banckInfoLabel)
+            bankInfoLabelContainer.appendChild(banckInfoHr)
+            return bankInfoLabelContainer
+        }
+
+        function createInputElement(
+            inputId, 
+            inputLabel,
+            type="input"
+        ) { 
+            input = document.createElement(type);
+            input.setAttribute("type", "text");
+            input.setAttribute("name", inputId);
+            input.setAttribute("id", inputId);
+            input.classList.add("form-control");
+            
+            if (type == "textarea") input.innerHTML = "camiseta com numero "+ count
+            else input.value = count+"camiseta"+count;
+
+            let container = document.createElement("div");
+
+            let label = document.createElement("Label");
+            label.classList.add("control-label");
+            label.style = "margin-top: 16px;";
+            label.innerHTML = inputLabel
+            label.setAttribute("for",  inputId)
+            
+
+            container.appendChild(label)
+            container.appendChild(input)
+            return container
+        }
+
+        function simulateSubmit() {
+            inputsValues = []
+            inputsiDS.forEach(function(formId, i) {
+                let formControl = document.getElementById(formId)
+                inputsValues.push({
+                    name: formId,
+                    type: 'String',
+                    value: formControl.value,
+                    isDirty: true
+                });
+                
+            })
+            console.log(inputsValues)
+        }
+
+        addForm()
+    </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</form>
